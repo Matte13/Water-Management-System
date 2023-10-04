@@ -1,0 +1,86 @@
+﻿@model CropDTO
+@*
+//This Viewer is used to show History of water use per field.*@
+@{
+
+    int balance = 0;
+}
+<br />
+<h3><b>History of water use per field</b></h3>
+<br />
+@*this for calls GethistoricW action*@
+<form asp-action="GethistoricW">
+    <div class="row">
+
+
+        <div class="col">
+            <h5>Crop Name</h5>
+            @*dropdown box for crop name*@
+            @Html.DropDownListFor(a=>a.id,new SelectList ( @ViewBag.crop ,"id","Name") , new { @class="form-control" } )<br />
+            <button class="btn btn-primary">Search</button>
+        </div>
+
+    </div>
+
+</form>
+<br />
+<br />
+
+@if (@ViewBag.water != null)
+{
+
+    <div class="row">
+        <div class="col-8">
+            <!--If data available , it shows data in the table-->
+            @if (@ViewBag.water.Count > 0)
+            {
+                <table class="table table-hover table-fixed">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">Quantity Booked</th>
+                            <th scope="col">Quantity Used</th>
+                            <th scope="col">Quantity Balance</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @*create a table for water history*@
+                        @foreach (var obj in @ViewBag.water)
+                        {
+                            balance = @obj.WaterAssigned - @obj.WaterUsed;
+                            <tr>
+                                <th scope="row">@obj.id</th>
+                                <td>@obj.Date.ToString("yyyy-MM-dd")</td>
+                                <td>@obj.WaterAssigned</td>
+
+                                <td>@obj.WaterUsed</td>
+                                @if (@balance > 0)
+                                {
+                                    <td style="background-color:green">@balance</td>
+                                }
+                                else if (@balance == 0)
+                                {
+                                    <td style="background-color:yellow">@balance</td>
+
+                                }else
+                                {
+                                    <td style="background-color:red; font-weight: bold;">@balance</td>
+                                }
+
+                        </tr>
+                    }
+                </tbody>
+                </table>
+            }
+            else
+            {
+                <!--if no data-->
+                <p>No data</p>
+            }
+        </div>
+    </div>
+    <br />
+    <br />
+}

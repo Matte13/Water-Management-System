@@ -1,0 +1,36 @@
+﻿@model actuator
+@*
+//This Viewer is used to get Actuator from the user to add to the database.
+*@
+@{
+}
+<h3>Add Actuator</h3>
+<br />
+@*This form calls AddActuator action*@
+<form asp-action="AddActuator">
+    @*crop Dropdown box*@
+<p>Select the crop you want to add the actuator to</p>
+    @Html.DropDownListFor(a=>a.Cropid,new SelectList ( @ViewBag.crop ,"id","Name"),new {required = "required"})<br />
+<br />
+    @*Type Dropdown box*@
+    <p>Select the type of actuator to add</p>
+    @Html.DropDownListFor(a=>a.Type,new SelectList ( @ViewBag.type ,"Name","Name"),new {required = "required"})<br />
+<br />
+@*State Dropdown box*@
+<p>State</p>
+<select asp-for="State">
+    <option value="YES">Yes</option>
+    <option value="NOW">No</option>
+</select>
+<br /><br />
+@*Mode Dropdown *@
+    <p>Mode</p>
+    <select asp-for="Mode">
+        <option value="Automatic">Automatic</option>
+        <option value="Manual">Manual</option>
+    </select>
+<br />
+<br />
+    <!--Submit button to call AddActuator action-->
+<button class="btn btn-primary">Add</button>
+</form>

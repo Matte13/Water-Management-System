@@ -1,0 +1,45 @@
+﻿@model crop
+
+@*This Viewer is used to get crop from the user to add to the database.*@
+@{
+}
+
+<h3>Add Crop</h3>
+<br />
+@*This form calls addcrop action*@
+<form asp-action="addcrop">
+    <p>Name of the crop</p>
+    @*textbox for crop name input*@
+    <input type="text" asp-for="Name" required/>
+    <br /><br />
+<p>Crop size in hectares</p>
+@*textbox for hectares input*@
+    <input type="number" asp-for="Hectars" min="0" required />
+<br /><br />
+<p>Need for water</p>
+@*dropdown box for Quantity*@
+<select  asp-for="Quantity">
+    <option value="Low">Low</option>
+    <option value="Medium">Medium</option>
+    <option value="High">High</option>
+</select>
+
+<br /><br />
+<p>Type of Irrigation</p>
+  @*  dropdown box for Irrigation*@
+<select asp-for="Irrigation">
+        <option value="Traditional">Traditional</option>
+        <option value="Drop by Drop">Drop by Drop</option>
+</select>
+<br /><br />
+<p>Ideal humidity</p>
+   @* input box for humidity*@
+    <input type="number" asp-for="Humidity" min="0" required />
+    <br /><br />
+    <p>Water assigned in L</p>
+ @*   input box for water assigned*@
+    <input type="number" asp-for="water" min="0" required />
+<br /><br />
+<!--Submit button to call addcrop action-->
+<button class="btn btn-primary">Add</button>
+</form>

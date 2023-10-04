@@ -1,0 +1,48 @@
+﻿@model List<crop>
+@*This Viewer is used to show crops.*@@{
+    int i = 1;
+}
+<br />
+<h3>CROPS</h3>
+<br />
+<!--If data available , it shows data in the table-->
+@if (Model != null)
+{
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <!--Table Header-->
+                <th scope="col">Id</th>
+                <th scope="col">Name</th>
+                <th scope="col">Hectares</th>
+                <th scope="col">Irrigation Quantity</th>
+                <th scope="col">Irregation Type</th>
+                <th scope="col">Ideal Humidity</th>
+                 <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+           @* table for crop details*@
+            @foreach (var obj in Model)
+            {
+                <tr>
+                    <th scope="row">@obj.id</th>
+                    <td>@obj.Name</td>
+                    <td>@obj.Hectars</td>
+                    <td>@obj.Irrigation</td>
+                    <td>@obj.Quantity</td>
+                    <td>@obj.Humidity %</td>
+                    <td><a class="btn btn-danger" asp-action="DelCrop" asp-route-id="@obj.id">Delete</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+    <br />
+    <h3>Meteo</h3>
+<div>
+   @* calls thirdpart API for meteo *@
+    <div style="max-width: 1000px" id="ww_4b147bdb31ac3" v='1.3' loc='auto' a='{"t":"horizontal","lang":"en","sl_lpl":1,"ids":[],"font":"Arial","sl_ics":"one_a","sl_sot":"celsius","cl_bkg":"image","cl_font":"#FFFFFF","cl_cloud":"#FFFFFF","cl_persp":"#81D4FA","cl_sun":"#FFC107","cl_moon":"#FFC107","cl_thund":"#FF5722"}'><a href="https://oneweather.org/archive/" id="ww_4b147bdb31ac3_u" target="_blank">Weather history</a></div><script async src="https://app1.weatherwidget.org/js/?id=ww_4b147bdb31ac3"></script>
+</div>
+

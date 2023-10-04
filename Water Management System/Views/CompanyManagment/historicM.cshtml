@@ -1,0 +1,103 @@
+﻿@model CropDTO
+@*
+//This Viewer is used to show Actuator/Sensor for crop*@
+@{
+}
+<br />
+<h3><b>Actuator/Sensor for crop</b></h3>
+<br />
+<form asp-action="GethistoricM">
+    <div class="row">
+
+       
+        <div class="col">
+            <h5>Crop Name</h5>
+            @*dropdown box for Crop name*@
+            @Html.DropDownListFor(a=>a.id,new SelectList ( @ViewBag.crop ,"id","Name") , new { @class="form-control" } )<br />
+            <button class="btn btn-primary">Search</button>
+        </div>
+
+    </div>
+   
+</form>
+<br />
+<br />
+
+@if (@ViewBag.sensor != null)
+{
+    <h3>SENSOR</h3>
+    <div class="row">
+        <div class="col-5">
+            <!--If data available , it shows data in the table-->
+            @if (@ViewBag.sensor.Count > 0)
+            {
+                <table class="table table-hover table-fixed">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">Type</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @*table for available sensors*@
+                        @foreach (var obj in @ViewBag.sensor)
+                        {
+                            <tr>
+                                <th scope="row">@obj.id</th>
+                            <td>@obj.type</td>
+
+                        </tr>
+                    }
+                </tbody>
+                </table>
+            }
+            else
+            {
+                <p>No data</p>
+            }
+        </div>
+    </div>
+    <br />
+    <br />
+}
+@if (@ViewBag.actuators != null)
+{
+<h3>ACTUATORS</h3>
+<div class="row">
+    <div class="col-8">
+            @if (@ViewBag.actuators.Count > 0)
+            {
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">Type</th>
+                            <th scope="col">State</th>
+                            <th scope="col">Mode</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @*table for available actuators*@
+                        @foreach (var obj in @ViewBag.actuators)
+                        {
+                            <tr>
+                                <th scope="row">@obj.id</th>
+                                <td>@obj.Type</td>
+                                <td>@obj.State</td>
+                                <td>@obj.Mode</td>
+
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <!--if no data-->
+                <p>No data</p>
+            }
+        </div>
+</div>
+}

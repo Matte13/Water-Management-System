@@ -1,0 +1,23 @@
+﻿.navbar-profile ul.nav > li > a {
+    color: #777;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    line-height: 20px;
+}
+
+.navbar-profile ul.nav > li .dropdown-menu {
+    right: 0;
+    left:auto;
+}
+
+@media (max-width: 767px) {
+    .navbar-profile {
+        position: absolute;
+        display: inline-block;
+        width: auto;
+        right: 80px;
+        top: 0;
+        text-align: center;
+        margin: auto;
+    }
+}

@@ -1,0 +1,64 @@
+﻿@model List<UserDTO>
+@*
+//This Viewer is used to show GSI User managment Page
+*@
+@{
+}
+<br />
+<br />
+
+<h3>Company</h3>
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+
+            <th scope="col">Company Name</th>
+            <th scope="col">User Name</th>
+            <th scope="col">Allocated Water</th>
+        
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var obj in ViewBag.data2)
+        {
+            <tr>
+
+                <td>@obj.CompanyName</td>
+                <td>@obj.username</td>
+                <td>@obj.water</td>
+       
+            </tr>
+        }
+
+    </tbody>
+</table>
+<br />
+<br />
+<br />
+
+<h3>Pending requests for New Users</h3>
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+         
+            <th scope="col">Company Name</th>
+            <th scope="col">User Name</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var obj in Model)
+        {
+            <tr>
+            
+                <td>@obj.CompanyName</td>
+                <td>@obj.username</td>
+                <td><a class="btn btn-primary" asp-controller="WaterManagment" asp-action="ApproveUser" asp-route-id="@obj.Userid">Approve</a></td>
+                <td><a class="btn btn-danger" asp-action="RejectUser" asp-controller="WaterManagment" asp-route-id="@obj.Userid">Reject</a></td>
+
+            </tr>
+        }
+
+    </tbody>
+</table>

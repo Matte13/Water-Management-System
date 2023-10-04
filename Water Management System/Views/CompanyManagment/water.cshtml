@@ -1,0 +1,72 @@
+﻿@model waterrequest
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    string status = "";
+}
+<h3>Water Managment</h3>
+<br />
+<p>Current amount of water per day:<span style="color:blue"> @ViewBag.currentwater</span> liters</p>
+<br />
+@*this form calls Addwaterrequest action *@
+<form  asp-action="Addwaterrequest">
+<p>Change the daily amount</p>
+<input type="number" asp-for="waterreqtesed" required />
+<br /><br />
+<button class="btn btn-primary">Request</button>
+</form>
+<br />
+<div>
+    <h4>HISTORY</h4>
+    <br />
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <!--Table Headers-->
+                <th scope="col">id</th>
+                <th scope="col">Date</th>
+                <th scope="col">Amount</th>
+                <th scope="col">Status</th>
+        
+            </tr>
+        </thead>
+        <tbody>
+          @*  table for history of then water requested*@
+            @foreach (var obj in @ViewBag.history)
+            {
+                @if (obj.Status == 0)
+                {
+                   status= "PENDING";
+                }
+                @if (obj.Status == 1)
+                {
+                    status = "APPROVED";
+                }
+                @if (obj.Status == 2)
+                {
+                    status = "REJECTED";
+                }
+                <tr>
+                    <th scope="row">@obj.id</th>
+                    <th scope="row">@obj.Date.ToString("yyyy-MM-dd")</th>
+                    <th scope="row">@obj.waterreqtesed</th>
+                    @if (obj.Status == 1)
+                    {
+                        <th scope="row" style="background-color: green">@status</th>
+                    }
+                    else if (obj.Status==0){
+
+                        <th scope="row" style="background-color: yellow">@status</th>
+                    }
+                    else if (obj.Status == 2)
+                    {
+
+                        <th scope="row" style="background-color: red">@status</th>
+                    }
+
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

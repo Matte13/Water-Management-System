@@ -1,0 +1,71 @@
+﻿@model List<waterrequest>
+
+@*
+
+//This Viewer is used to show GSI Index Page
+*@
+@{
+}
+<h3>COMPANIES</h3>
+<div class="row">
+    <div class="col-6">
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+           @* Table Headers*@
+            <th scope="col">#</th>
+            <th scope="col">Company</th>
+            <th scope="col">Water Allocated Amount</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @*Show company Details in a table*@
+        @foreach (var obj in @ViewBag.comany)
+        {
+            <tr>
+                <th scope="row">@obj.id</th>
+                <td>@obj.name</td>
+                <td>@obj.water</td>
+             
+
+            </tr>
+        }
+
+    </tbody>
+</table>
+</div>
+</div>
+<br />
+<br />
+<br />
+<br />
+<h3>Pending requests to change company water</h3>
+@*Show Pending requests to change company water in a table*@
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            @* Table Headers*@
+            <th scope="col">#</th>
+            <th scope="col">Company</th>
+            <th scope="col">Requested Amount</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @*table for requested water for approvel*@
+        @foreach(var obj in Model){
+        <tr>
+            <th scope="row">@obj.id</th>
+            <td>@obj.Compname</td>
+            <td>@obj.waterreqtesed</td>
+                <td><a class="btn btn-primary" asp-controller="WaterManagment" asp-action="Approvewater" asp-route-id="@obj.id">Approve</a></td>
+                <td><a class="btn btn-danger" asp-action="Rejectwater" asp-controller="WaterManagment" asp-route-id="@obj.id">Reject</a></td>
+      
+        </tr>
+        }
+       
+    </tbody>
+</table>
+

@@ -1,0 +1,53 @@
+﻿@model signup
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
+@*Signup form Viewer*@
+<form asp-controller="GoogleLogin" asp-action="Signupnow">
+	<div class=" d-flex justify-content-center">
+
+		<div class="col-6">
+			<br />
+			<br />
+			<h3>Signup</h3>
+			<br />
+			<input type="email" pattern=".+gmail\.com" placeholder=" Username (OAuth2)" title="not a Gmail account." class="form-control" asp-for="Username" required />
+			<br />
+			<input type="text" placeholder="Company Name" class="form-control" asp-for="Company" required/>
+
+			<br />
+
+			<button class="btn btn-primary">SIGNUP</button>
+		</div>
+
+	</div>
+	<br />
+
+</form>
+
+@*<script type="text/javascript">
+	test();
+	function test() {
+		var myJsVariable = "@ViewBag.Message";
+		if (myJsVariable == 'Successfully sent for Approvel!') {
+
+			function ShowErrorPopup() {
+
+				if (txt != "") {
+					Swal.fire(
+						myJsVariable
+					)
+				}
+
+			}
+
+			document.location = '/home/index';
+		}
+
+	};
+
+
+</script>*@

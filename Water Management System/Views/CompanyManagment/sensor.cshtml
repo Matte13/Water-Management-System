@@ -1,0 +1,26 @@
+﻿@model Sensor
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<h3>Add Sensor</h3>
+<br />
+@*this form calls addsensor action*@
+<form asp-action="addsensor">
+
+    <p>Select the crop you want to add the sensor to</p>
+    @*dropdown box for crop*@
+    @Html.DropDownListFor(a=>a.CropID,new SelectList ( @ViewBag.crop ,"id","Name"),new {required = "required"})<br />
+    <br />
+    <p>Select the type of sensor to add</p>
+@*    dropdown box for sensors*@
+    <select asp-for="type" required>
+        <option value="Humidity">Humidity</option>
+        <option value="Temperature">Temperature</option>
+    </select>
+    <br /><br />
+    <!--Submit button to call addcrop action-->
+    <button class="btn btn-primary">Add</button>
+
+</form>

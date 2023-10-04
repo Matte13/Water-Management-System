@@ -1,0 +1,94 @@
+﻿@model StatDTO
+@*
+//This Viewer is used to show GSI statictics Page
+*@
+@{
+    int i = 0;
+}
+
+<script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
+
+<br />
+<br />
+<h4>Statictics</h4>
+<br />
+<div class="col">
+    <form asp-action="StaticticsPOST">
+    <h5 >Company Name</h5>
+    @*dropdown box for Company name*@
+   
+        @Html.DropDownListFor(a=>a.compid,new SelectList ( @ViewBag.comp ,"id","name"), new { @class = "form-control"})
+        <br /><br />
+        <label class="form-label fw-bold" for="form6Example3">Crop Name</label>
+
+        <select class="form-control" id="CropDropdown"
+                name="CropDropdown" required></select>
+<br />
+        @*Search Button for get Deails as per the user inputs*@
+        <button class="btn btn-primary">Search</button>
+    </form>
+</div>
+
+<br />
+<br />
+@*If data has , show data in the table*@
+@if (ViewBag.data != null)
+{
+    if (ViewBag.data.Count != 0)
+    {
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Quantity Booked</th>
+                    <th scope="col">Quantity Used</th>
+                    <th scope="col">Quantity Balance</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var obj in ViewBag.data)
+                {
+                    i = i + 1;
+                    int balance = @obj.WaterAssigned - @obj.WaterUsed;
+                    <tr>
+                        <th scope="row">i</th>
+                        <td>@obj.Date.ToString("yyy-MM-dd")</td>
+                        <td>@obj.WaterAssigned</td>
+                        <td>@obj.WaterUsed</td>
+                       @if (@balance > 0)
+                                {
+                                   @* if balance greater than  show in green*@
+                                    <td style="background-color:green">@balance</td>
+                                }
+                                else if (@balance == 0)
+                                {
+                            @* if balance equal to zero then  show in yello*@
+                                    <td style="background-color:yellow">@balance</td>
+
+                                }else
+                                {
+                            @* if balance else than o the show in red*@
+                                    <td style="background-color:red; font-weight: bold;">@balance</td>
+                                }
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <div class="col">
+            <p>No data</p>
+        </div>
+    }
+}
+else
+{
+    <div class="col">
+        <p>No data</p>
+    </div>
+}
+<script src="~/js/autopick.js"></script>

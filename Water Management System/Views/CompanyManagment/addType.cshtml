@@ -1,0 +1,28 @@
+﻿@model Typem
+@*
+//This Viewer is used to get Type from the user to add to the database.
+@{
+}
+@*Add type form*@
+
+<h3>Add Actuator Type</h3>
+<br />
+<br />
+@*this form calls saveType action*@
+<form method="post" asp-controller="CompanyManagment" asp-action="saveType">
+    <div class="row">
+        <div class="col-4">
+      
+        @*textbox for Type*@
+        <input type="text" asp-for="Name"  required/>
+       </div>
+    </div>
+
+    <br />
+    <div class="row">
+<div class="col-1">
+    <!--Submit button to call SaveType action-->
+    <button class="btn btn-primary">Save</button>
+        </div>
+    </div>
+</form>
